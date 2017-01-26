@@ -24,8 +24,8 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void do_movement();
 GLuint loadCubemap();
 
-const GLuint SCREEN_WIDTH = 800;
-const GLuint SCREEN_HEIGHT = 600;
+const GLuint SCREEN_WIDTH = 1024;
+const GLuint SCREEN_HEIGHT = 780;
 const char WINDOW_TITLE[] = "GKOM - przenosnik";
 
 bool keys[1024];
