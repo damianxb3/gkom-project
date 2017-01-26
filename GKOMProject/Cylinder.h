@@ -13,20 +13,20 @@ namespace Cylinder
 	float b = radius * sin(M_PI / segments);
 
 	GLfloat cylinderVertices[] = {
-		 0.0f, 0.0f,   0.0f,	0.5f, 0.0f,		 0.0f,  -1.0f,  0.0f,
+		 0.0f, 0.0f,   0.0f,	0.5f, 1.0f,		 0.0f,  -1.0f,  0.0f,
 		 b,    0.0f,   a,		0.0f, 0.0f,		 0.0f,  -1.0f,  0.0f,
-		-b,    0.0f,   a,	    1.0f, 1.0f,		 0.0f,  -1.0f,  0.0f,
+		-b,    0.0f,   a,	    0.0f, 1.0f,		 0.0f,  -1.0f,  0.0f,
 
-		 0.0f, height, 0.0f,	0.5f, 0.5f,		 0.0f,  1.0f,  0.0f,
+		 0.0f, height, 0.0f,	0.5f, 1.0f,		 0.0f,  1.0f,  0.0f,
 		 b,    height, a,		0.0f, 0.0f,		 0.0f,  1.0f,  0.0f,
-		-b,	   height, a,		1.0f, 1.0f,		 0.0f,  1.0f,  0.0f,
+		-b,	   height, a,		0.0f, 1.0f,		 0.0f,  1.0f,  0.0f,
 
 		 b,    height, a,		0.0f, 0.0f,		 0.0f,  0.0f,  1.0f,
-		-b,    height, a,		1.0f, 1.0f,		 0.0f,  0.0f,  1.0f,
-		 b,	   0.0f,   a,		0.0f, 0.0f,		 0.0f,  0.0f,  1.0f,
+		-b,    height, a,		1.0f/segments, 0.0f,		 0.0f,  0.0f,  1.0f,
+		 b,	   0.0f,   a,		0.0, height,	 0.0f,  0.0f,  1.0f,
 
-		-b,    height, a,		0.0f, 0.0f,		 0.0f,  0.0f,  1.0f,
-		 b,    0.0f,   a,		1.0f, 1.0f,		 0.0f,  0.0f,  1.0f,
+		-b,    height, a,		0.0, height,	 0.0f,  0.0f,  1.0f,
+		 b,    0.0f,   a,		1.0f/segments, 0.0f,		 0.0f,  0.0f,  1.0f,
 		-b,    0.0f,   a,		0.0f, 0.0f,		 0.0f,  0.0f,  1.0f,
 	};
 	

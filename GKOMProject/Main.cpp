@@ -40,6 +40,8 @@ bool movementOn = false;
 float cogSpeedValue = 10.0f;
 
 glm::vec3 lightPos(1.2f, 5.0f, 2.0f);
+GLfloat diffuseLightIntensity = 1.0f;
+GLfloat ambientLightIntensity = 1.0f;
 
 int main()
 {
@@ -113,6 +115,8 @@ int main()
 		// create light:
 		GLint lightPosLoc = glGetUniformLocation(mainShader.Program, "lightPos");
 		glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
+		glUniform1f(glGetUniformLocation(mainShader.Program, "ambientLightIntensity"), ambientLightIntensity);
+		glUniform1f(glGetUniformLocation(mainShader.Program, "diffuseLightIntensity"), diffuseLightIntensity);
 
 		view = camera.GetViewMatrix();
 		projection = glm::perspective(camera.Zoom, float(SCREEN_WIDTH) / float(SCREEN_HEIGHT), 0.1f, 1000.0f);
@@ -165,6 +169,37 @@ void do_movement()
 		camera.ProcessKeyboard(LEFT, deltaTime);
 	if (keys[GLFW_KEY_D])
 		camera.ProcessKeyboard(RIGHT, deltaTime);
+
+	if (keys[GLFW_KEY_EQUAL] == true)
+		cogSpeedValue += 15.0f * deltaTime;
+	if (keys[GLFW_KEY_MINUS] == true)
+		cogSpeedValue -= 15.0f * deltaTime;
+
+	if (keys[GLFW_KEY_DOWN] == true){
+		diffuseLightIntensity -= 1.5f * deltaTime;
+		if (diffuseLightIntensity < 0.0f)
+			diffuseLightIntensity = 0.0f;
+	}
+		
+	if (keys[GLFW_KEY_UP] == true && diffuseLightIntensity <= 10.0f)
+	{
+		diffuseLightIntensity += 1.5f * deltaTime;
+		if (diffuseLightIntensity > 20.0f)
+			diffuseLightIntensity = 20.0f;
+	}
+
+	if (keys[GLFW_KEY_LEFT] == true)
+	{
+		ambientLightIntensity -= 1.5f * deltaTime;
+		if (ambientLightIntensity < 0.0f)
+			ambientLightIntensity = 0.0f;
+	}
+	if (keys[GLFW_KEY_RIGHT] == true && ambientLightIntensity <= 10.0f)
+	{
+		ambientLightIntensity += 1.5f * deltaTime;
+		if (ambientLightIntensity > 20.0f)
+			ambientLightIntensity = 20.0f;
+	}
 }
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
@@ -183,10 +218,6 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		movementOn = !movementOn;
 		cogSpeedValue = 5.0f;
 	}
-	if (key == GLFW_KEY_EQUAL && action == GLFW_PRESS)
-		cogSpeedValue += 2.0f;
-	if (key == GLFW_KEY_MINUS && action == GLFW_PRESS)
-		cogSpeedValue -= 2.0f;
 }
 
 void mouse_callback(GLFWwindow* window, double xpos, double ypos)
